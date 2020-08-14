@@ -3,15 +3,18 @@ include_once "/opt/lampp/htdocs/packages.php";
 
 class Customer extends DBEcommerceConn {
     public function fetchUidByEmailPwd($email, $pwd) {
-        $sql = "SELECT uid FROM customers WHERE email = ? AND pwd = ?";
+        $sql  = "SELECT uid FROM customers WHERE email = ? AND pwd = ?";
         $stmt = $this->connection()->prepare($sql);
-        $stmt->execute([$email, $pwd]);
-        return $stmt->fetch();
+        if ($stmt && $stmt->execute([$email, $pwd])) {
+            return $stmt->fetch();
+        }
+        return [];
     }
 
     public function insert($email, $pwd) {
-        $sql = "INSERT IGNORE INTO customers(email, pwd) VALUES (?, ?)";
+        $sql  = "INSERT IGNORE INTO customers(email, pwd) VALUES (?, ?)";
         $stmt = $this->connection()->prepare($sql);
-        $stmt->execute([$email, $pwd]);
+        if ($stmt) return $stmt->execute([$email, $pwd]);
+        return false;
     }
 }
