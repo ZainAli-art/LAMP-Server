@@ -1,7 +1,7 @@
 <?php
 include_once "/opt/lampp/htdocs/packages.php";
 
-class CustomerController {
+class UserController {
     private $model;
     private $view;
 
