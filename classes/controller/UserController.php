@@ -18,7 +18,7 @@ class UserController {
         $this->view->printUsersJson($users);
     }
 
-    public function addNewUser($uid, $email, $fullname, $imgdir) : int {
+    public function addNewUser($uid, $email, $fullname, $imgdir) {
         return $this->model->insert($uid, $email, $fullname, $imgdir);
     }
 }

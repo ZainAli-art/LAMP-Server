@@ -7,10 +7,10 @@ $email = $_POST["email"];
 $fullname = $_POST["fullname"];
 $imgdir = $_POST["img_dir"];
 
-$result = $controller->insert($uid, $email, $fullname, $imgdir);
+$result = $controller->addNewUser($uid, $email, $fullname, $imgdir);
 
 if ($result) {
-    echo "success";
+    echo '{"response": "success"}';
 } else {
-    echo "failure";
+    echo '{"response": "failure"}';
 }
