@@ -5,7 +5,7 @@ $controller = new UserController();
 $uid = $_POST["uid"];
 $email = $_POST["email"];
 $fullname = $_POST["fullname"];
-$imgdir = $_POST["img_dir"];
+$imgdir = $_POST["img_dir"] ?? null;
 
 $result = $controller->addNewUser($uid, $email, $fullname, $imgdir);
 
