@@ -17,6 +17,18 @@ class Product extends DBEcommerceConn {
         return [];
     }
 
+    public function fetchRecentProductsOfLimit($limit) : array {
+        $sql = "SELECT * FROM products ORDER BY upload_time LIMIT $limit";
+        $result = $this->connection()->query($sql);
+        return $result->fetchAll();
+    }
+
+    public function searchProductsByNameWithLimit($pname, $limit) : array {
+        $sql = "SELECT * FROM products WHERE pname LIKE '%$pname%' LIMIT $limit";
+        $result = $this->connection()->query($sql);
+        return $result->fetchAll();
+    }
+
     public function insertProduct($pname, $imgDir, $catId, $price, $timestamp) {
         $sql  = "INSERT INTO products(pname, img_dir, cat_id, price, upload_time) 
                 VALUES (?, ?, ?, ?, FROM_UNIXTIME(?));";
