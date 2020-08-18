@@ -17,10 +17,10 @@ class Product extends DBEcommerceConn {
         return [];
     }
 
-    public function insertProduct($pname, $imgDir, $catId) {
-        $sql  = "INSERT INTO products(pname, img_dir, cat_id) VALUES (?, ?, ?)";
+    public function insertProduct($pname, $imgDir, $catId,  $timestamp) {
+        $sql  = "INSERT INTO products(pname, img_dir, cat_id, upload_time) VALUES (?, ?, ?, FROM_UNIXTIME(?));";
         $stmt = $this->connection()->prepare($sql);
-        if ($stmt) return $stmt->execute([$pname, $imgDir, $catId]);
+        if ($stmt) return $stmt->execute([$pname, $imgDir, $catId, $timestamp]);
         return false;
     }
 }
