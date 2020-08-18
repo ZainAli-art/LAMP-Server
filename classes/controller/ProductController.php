@@ -26,7 +26,7 @@ class ProductController {
         return $this->model->fetchProductsByCatId($catId);
     }
 
-    public function insertProduct($pname, $imgDir, $catId, $timestamp) {
-        $this->model->insertProduct($pname, $imgDir, $catId, $timestamp);
+    public function insertProduct($pname, $imgDir, $catId, $price, $timestamp) {
+        $this->model->insertProduct($pname, $imgDir, $catId, $price, $timestamp);
     }
 }
