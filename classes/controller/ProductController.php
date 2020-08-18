@@ -11,19 +11,19 @@ class ProductController {
     }
 
     public function showAllProductsJSON() {
-        $this->view->showProductsJSON($this->fetchAllProducts());
+        $this->view->showProductsJSON($this->model->fetchAllProducts());
     }
 
     public function showProductsByCatIdJSON($catId) {
-        $this->view->showProductsJSON($this->fetchProductsByCatId($catId));
+        $this->view->showProductsJSON($this->model->fetchProductsByCatId($catId));
     }
 
-    public function fetchAllProducts() : array {
-        return $this->model->fetchAllProducts();
+    public function searchAndShowProductsByNameWithLimitJSON($pname, $limit) {
+        $this->view->showProductsJSON($this->model->searchProductsByNameWithLimit($pname, $limit));
     }
 
-    public function fetchProductsByCatId($catId) : array{
-        return $this->model->fetchProductsByCatId($catId);
+    public function showRecentProductsByLimit($limit) {
+        $this->view->showProductsJSON($this->model->fetchRecentProductsOfLimit($limit));
     }
 
     public function insertProduct($pname, $imgDir, $catId, $price, $timestamp) {
