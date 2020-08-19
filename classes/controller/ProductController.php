@@ -14,6 +14,10 @@ class ProductController {
         $this->view->showProductsJSON($this->model->fetchAllProducts());
     }
 
+    public function showProductDetailsByPidJSON($pid) {
+        $this->view->showProductsJSON($this->model->fetchProductDetailsByPid($pid));
+    }
+
     public function showProductsByCatIdJSON($catId) {
         $this->view->showProductsJSON($this->model->fetchProductsByCatId($catId));
     }
