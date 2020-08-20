@@ -12,13 +12,16 @@ include_once $includesPath . "DbEcommerceConn.php";
 include_once $modelPath . "Category.php";
 include_once $modelPath . "Product.php";
 include_once $modelPath . "User.php";
+include_once $modelPath . "Order.php";
 
 // view paths
 include_once $viewPath . "CategoryView.php";
 include_once $viewPath . "ProductView.php";
 include_once $viewPath . "UserView.php";
+include_once $viewPath . "ViewUtils.php";
 
 // controller paths
 include_once $controllerPath . "CategoryController.php";
 include_once $controllerPath . "ProductController.php";
 include_once $controllerPath . "UserController.php";
+include_once $controllerPath . "OrderController.php";
