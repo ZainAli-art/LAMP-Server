@@ -7,12 +7,44 @@ class Order extends DbEcommerceConn {
         $this->connection()->query($sql);
     }
 
-    public function fetchProductsByUid($uid) : array {
-        $sql = "SELECT p.pid AS pid, pname, cat_id, img_dir, price, upload_time
-                FROM orders o JOIN products p ON o.pid = p.pid and o.uid = ?";
+    public function fetchOrderedProductsByUid($uid) : array {
+        $sql = "SELECT oid, pname AS product, img_dir
+                FROM orders o JOIN products p ON o.pid = p.pid
+                WHERE o.uid = ?";
 
+        $stmt;
+        if (($stmt = $this->connection()->prepare($sql)) && $stmt->execute([$uid])) {
+            return $stmt->fetchAll();
+        }
+        return [];
+    }
+
+    public function fetchOrderDetailsByOid($oid) {
+        $sql = "SELECT 
+                    o.oid AS oid,
+                    pname,
+                    p.img_dir AS img_dir,
+                    c.cat_name AS category,
+                    order_time,
+                    price
+                FROM orders o
+                JOIN products p ON p.pid = o.pid
+                JOIN categories c ON c.cat_id = p.cat_id
+                WHERE oid = ?;";
+
+        $stmt;
+        if (($stmt = $this->connection()->prepare($sql)) && $stmt->execute([$oid])) {
+            return $stmt->fetch();
+        }
+        return null;
+    }
+
+    public function deleteByOid($oid) {
+        $sql = "DELETE FROM orders WHERE oid = :oid";
         $stmt = $this->connection()->prepare($sql);
-        $stmt->execute([$uid]);
-        return $stmt->fetchAll();
+        if ($stmt) {
+            $stmt->bindParam(":oid", $oid);
+            $stmt->execute();
+        }
     }
 }
