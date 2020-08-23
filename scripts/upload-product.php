@@ -12,4 +12,12 @@ $controller = new ProductController();
 $controller->insertProduct($pname, $imgDir, $catId, $price, $timestamp);
 file_put_contents($imgDir, base64_decode($image));
 
-echo "upload successful";
+// send notification that a new product has been uploaded
+$notification = array(
+    "title" => "Recent Products",
+    "body" => $pname,
+    "image" => $imgDir
+);
+
+$fcmController = new FCMController();
+$fcmController->notifyAllUsers($notification);
