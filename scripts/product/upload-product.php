@@ -5,7 +5,7 @@ $image = $_POST["image"];
 $pname = $_POST["pname"];
 $catId = $_POST["cat_id"];
 $timestamp = time();
-$imgDir = "../assets/IMG$timestamp.jpg";
+$imgDir = "../../assets/IMG$timestamp.jpg";
 $price = $_POST["price"];
 
 $controller = new ProductController();
