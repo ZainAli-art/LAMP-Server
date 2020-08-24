@@ -5,12 +5,14 @@ $image = $_POST["image"];
 $pname = $_POST["pname"];
 $catId = $_POST["cat_id"];
 $timestamp = time();
-$imgDir = "../../assets/IMG$timestamp.jpg";
+$imgDir = "assets/IMG$timestamp.jpg";
 $price = $_POST["price"];
+
+$imgUploadLocation = "../../assets/IMG$timestamp.jpg";
 
 $controller = new ProductController();
 $controller->insertProduct($pname, $imgDir, $catId, $price, $timestamp);
-file_put_contents($imgDir, base64_decode($image));
+file_put_contents($imgUploadLocation, base64_decode($image));
 
 // send notification that a new product has been uploaded
 $notification = array(
