@@ -1,5 +1,5 @@
 <?php
-include_once "/opt/lampp/htdocs/packages.php";
+include_once "/opt/lampp/htdocs/ecommerce/packages.php";
 
 $token = $_POST["fcm_token"];
 

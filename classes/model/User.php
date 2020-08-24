@@ -1,5 +1,5 @@
 <?php
-include_once "/opt/lampp/htdocs/packages.php";
+include_once "/opt/lampp/htdocs/ecommerce/packages.php";
 
 class User extends DBEcommerceConn {   
     public function insert($uid, $email, $fullname, $imgdir) {

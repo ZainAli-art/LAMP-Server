@@ -1,5 +1,5 @@
-<?php 
-include_once "/opt/lampp/htdocs/packages.php";
+<?php
+include_once "/opt/lampp/htdocs/ecommerce/packages.php";
 
 $controller = new ProductController();
 $limit = $_GET["limit"];

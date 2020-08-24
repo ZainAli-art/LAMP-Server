@@ -1,5 +1,5 @@
 <?php
-include_once "/opt/lampp/htdocs/packages.php";
+include_once "/opt/lampp/htdocs/ecommerce/packages.php";
 
 class Order extends DbEcommerceConn {
     public function add($uid, $pid) {
