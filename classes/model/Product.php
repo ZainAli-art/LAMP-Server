@@ -1,7 +1,7 @@
 <?php
 include_once "/opt/lampp/htdocs/ecommerce/packages.php";
 
-class Product extends DBEcommerceConn {
+class Product extends DbEcommerceConn {
     public function fetchAllProducts() : array {
         $sql    = "SELECT * FROM products";
         $result = $this->connection()->query($sql);
