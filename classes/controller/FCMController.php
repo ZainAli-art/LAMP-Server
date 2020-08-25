@@ -16,11 +16,19 @@ class FCMController {
         $this->model->insert($token);
     }
 
+    public function registerUserWithFcmToken($token, $uid) {
+        $this->model->insert($token, $uid);
+    }
+
     public function fetchAllTokens() : array {
         return $this->model->fetchAllTokens();
     }
 
     public function updateToken($oldToken, $newToken) {
         $this->model->updateToken($oldToken, $newToken);
+    }
+
+    public function unregisterToken($token) {
+        $this->model->deleteByToken($token);
     }
 }

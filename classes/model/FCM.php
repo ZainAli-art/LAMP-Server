@@ -37,8 +37,17 @@ class FCM extends DbEcommerceConn {
         curl_close($ch);
     }
 
-    public function insert($token) {
-        $sql = "INSERT INTO fcm(token) VALUES('$token');";
+    public function insert($token, $uid = null) {
+        $sql = null;
+        if ($uid == null) {
+            $sql = "INSERT INTO fcm(token) VALUES ('$token');";
+        } else {
+            $sql = "INSERT INTO fcm(token, uid) VALUES ('$token', '$uid')
+                    ON DUPLICATE KEY UPDATE 
+                        token = '$token',
+                        uid = '$uid';";
+        }
+
         if ($this->connection()->query($sql)) 
             echo "response: success";
         else
@@ -57,5 +66,10 @@ class FCM extends DbEcommerceConn {
             echo "response: success";
         else
             echo "responose: failure";
+    }
+
+    public function deleteByToken($token) {
+        $sql = "DELETE FROM fcm WHERE token = '$token';";
+        $this->connection()->query($sql);
     }
 }
