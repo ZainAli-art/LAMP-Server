@@ -30,7 +30,7 @@ class ProductController {
         $this->view->showProductsJSON($this->model->fetchRecentProductsOfLimit($limit));
     }
 
-    public function insertProduct($pname, $imgDir, $catId, $price, $timestamp) {
-        $this->model->insertProduct($pname, $imgDir, $catId, $price, $timestamp);
+    public function insertProduct($uid, $pname, $imgDir, $catId, $price, $timestamp) {
+        $this->model->insertProduct($uid, $pname, $imgDir, $catId, $price, $timestamp);
     }
 }
