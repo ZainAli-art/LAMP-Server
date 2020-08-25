@@ -11,13 +11,16 @@ class Product extends DbEcommerceConn {
     public function fetchProductDetailsByPid($pid) {
         $sql = "SELECT 
                     pid,
-                    uid,
+                    u.uid as seller_id,
                     p.pname AS product, 
                     cat_name AS category, 
                     p.img_dir AS img_dir, 
                     upload_time,
-                    price
-                FROM products p 
+                    price,
+                    fullname as seller,
+                    email as contact
+                FROM users u 
+                JOIN products p ON u.uid = p.uid
                 JOIN categories c ON p.cat_id = c.cat_id 
                 WHERE pid = ?";
         $stmt;
