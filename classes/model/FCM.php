@@ -17,24 +17,23 @@ class FCM extends DbEcommerceConn {
             "registration_ids" => $regitration_ids,
             "notification" => $notification
         );
-        $headers = array(
-            "Authorization: key=" . API_ACCESS_KEY,
-            "Content-Type: application/Json"
+        
+        $this->executeCurl($fields);
+    }
+
+    /**
+     * @param 
+     * $to is fcm_token of the user to which the notification
+     * is to be sent
+     */
+    public function notifySingleUser($to, $notification, $data = null) {
+        $fields = array(
+            "to" => $to,
+            "notification" => $notification,
+            "data" => $data
         );
-
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, "https://fcm.googleapis.com/fcm/send");
-        curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt($ch, CURLOPT_IPRESOLVE, CURL_IPRESOLVE_V4);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fields));
-
-        $result = curl_exec($ch);
-        echo $result;
-
-        curl_close($ch);
+        
+        $this->executeCurl($fields);
     }
 
     public function insert($token, $uid = null) {
@@ -71,5 +70,26 @@ class FCM extends DbEcommerceConn {
     public function deleteByToken($token) {
         $sql = "DELETE FROM fcm WHERE token = '$token';";
         $this->connection()->query($sql);
+    }
+
+    private function executeCurl($fields) {
+        $headers = array(
+            "Authorization: key=" . API_ACCESS_KEY,
+            "Content-Type: application/Json"
+        );
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, "https://fcm.googleapis.com/fcm/send");
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_IPRESOLVE, CURL_IPRESOLVE_V4);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fields));
+
+        $result = curl_exec($ch);
+        echo $result;
+
+        curl_close($ch);
     }
 }
