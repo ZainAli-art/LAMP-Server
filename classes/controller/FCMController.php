@@ -12,8 +12,8 @@ class FCMController {
         $this->model->notifyAllUsers($notification);
     }
 
-    public function notifySingleUser($to, $notification, $data = null) {
-        $this->model->notifySingleUser($to, $notification, $data = null);
+    public function notifySingleUser($to, $notification, $data) {
+        $this->model->notifySingleUser($to, $notification, $data);
     }
 
     public function addFcmToken($token) {

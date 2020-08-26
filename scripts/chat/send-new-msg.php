@@ -1,22 +1,24 @@
 <?php
 include_once "/opt/lampp/htdocs/ecommerce/packages.php";
 
-$fromId = $_POST["from_id"];
-$toId = $_POST["to_id"];
+$senderToken = $_POST["sender_token"];
+$receiverToken = $_POST["receiver_token"];
 $msg = $_POST["msg"];
-$sender = $_POST["sender"];
 
 $chatController = new ChatController();
-if ($chatController->insert($fromId, $toId, $msg)) {
-    $to = $_POST["to"]; // fcm_token
+if ($chatController->insert($senderToken, $receiverToken, $msg)) {
+    $sender = $_POST["sender_name"]; // sender name
+
     $notification = array(
         "title" => $sender,
-        "body" => $msg
+        "body" => $msg,
+        "tag" => "chat"
     );
     $data = array(
-        "from_id" => $fromId
+        "sender_token" => $senderToken,
+        "receiver_token" => $receiverToken
     );
 
     $fcmController = new FCMController();
-    $fcmController->notifySingleUser($to, $notification, $data);
+    $fcmController->notifySingleUser($receiverToken, $notification, $data);
 }

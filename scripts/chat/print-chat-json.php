@@ -1,8 +1,8 @@
 <?php
 include_once "/opt/lampp/htdocs/ecommerce/packages.php";
 
-$fromId = $_POST["from_id"];
-$toId = $_POST["to_id"];
+$senderToken = $_POST["sender_token"];
+$receiverToken = $_POST["receiver_token"];
 
 $controller = new ChatController();
-$controller->printChatJson($fromId, $toId);
+$controller->printChatJson($senderToken, $receiverToken);

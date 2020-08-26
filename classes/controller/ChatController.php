@@ -10,11 +10,11 @@ class ChatController {
         $this->view = new ViewUtils();
     }
 
-    public function insert($fromId, $toId, $msg) {
-        return $this->model->insert($fromId, $toId, $msg);
+    public function insert($senderToken, $receiverToken, $msg) {
+        return $this->model->insert($senderToken, $receiverToken, $msg);
     }
 
-    public function printChatJson($fromId, $toId) {
-        $this->view->printRawJson($this->model->fetchChat($fromId, $toId));
+    public function printChatJson($senderToken, $receiverToken) {
+        $this->view->printRawJson($this->model->fetchChat($senderToken, $receiverToken));
     }
 }

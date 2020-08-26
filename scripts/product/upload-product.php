@@ -19,7 +19,8 @@ file_put_contents($imgUploadLocation, base64_decode($image));
 $notification = array(
     "title" => "Recent Products",
     "body" => $pname,
-    "image" => $imgDir
+    "image" => $imgDir,
+    "tag" => "newProduct"
 );
 
 $fcmController = new FCMController();

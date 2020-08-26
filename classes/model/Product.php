@@ -18,8 +18,10 @@ class Product extends DbEcommerceConn {
                     upload_time,
                     price,
                     fullname as seller,
-                    email as contact
+                    email as contact,
+                    token as seller_token
                 FROM users u 
+                JOIN fcm ON u.uid = fcm.uid
                 JOIN products p ON u.uid = p.uid
                 JOIN categories c ON p.cat_id = c.cat_id 
                 WHERE pid = ?";
