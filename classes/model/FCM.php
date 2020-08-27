@@ -59,6 +59,14 @@ class FCM extends DbEcommerceConn {
         return $result->fetchAll();
     }
 
+    public function fetchUserNameByToken($token) {
+        $sql = "SELECT fullname
+                FROM fcm f
+                JOIN users u ON f.uid = u.uid and f.token = '$token'";
+        $result = $this->connection()->query($sql);
+        return $result->fetch();
+    }
+
     public function updateToken($oldToken, $newToken) {
         $sql = "UPDATE fcm SET token = $newToken WHERE token = $oldToken";
         if ($this->connection()->query($sql)) 

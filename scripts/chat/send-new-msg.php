@@ -8,7 +8,11 @@ $pid = $_POST["pid"];
 
 $chatController = new ChatController();
 if ($chatController->insert($senderToken, $receiverToken, $pid, $msg)) {
-    $sender = $_POST["sender_name"]; // sender name
+    $fcmController = new FCMController();
+
+    $sender = $fcmController->fetchUserNameByToken($senderToken)["fullname"];
+
+    echo "sender: $sender \n";
 
     $notification = array(
         "title" => $sender,
@@ -21,6 +25,5 @@ if ($chatController->insert($senderToken, $receiverToken, $pid, $msg)) {
         "pid" => $pid
     );
 
-    $fcmController = new FCMController();
     $fcmController->notifySingleUser($receiverToken, $notification, $data);
 }

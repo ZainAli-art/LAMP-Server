@@ -28,6 +28,10 @@ class FCMController {
         return $this->model->fetchAllTokens();
     }
 
+    public function fetchUserNameByToken($token) {
+        return $this->model->fetchUserNameByToken($token);
+    }
+
     public function updateToken($oldToken, $newToken) {
         $this->model->updateToken($oldToken, $newToken);
     }
