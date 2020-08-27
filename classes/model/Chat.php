@@ -16,7 +16,7 @@ class Chat extends DbEcommerceConn {
                 WHERE 
                     (sender_token = '$senderToken' AND receiver_token = '$receiverToken') OR
                     (sender_token = '$receiverToken' AND receiver_token = '$senderToken')
-                ORDER BY upload_time DESC";
+                ORDER BY upload_time";
 
         $result = $this->connection()->query($sql);
         return $result->fetchAll();
