@@ -17,4 +17,8 @@ class ChatController {
     public function printChatJson($senderToken, $receiverToken, $pid) {
         $this->view->printRawJson($this->model->fetchChat($senderToken, $receiverToken, $pid));
     }
+
+    public function printChatListJson($receiverToken) {
+        $this->view->printRawJson($this->model->fetchChatList($receiverToken));
+    }
 }
