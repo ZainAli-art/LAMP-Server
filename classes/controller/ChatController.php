@@ -14,6 +14,11 @@ class ChatController {
         return $this->model->insert($senderToken, $receiverToken, $pid, $msg);
     }
 
+    public function insertAndPrintChatsJson($senderToken, $receiverToken, $pid, $msg) {
+        $this->insert($senderToken, $receiverToken, $pid, $msg);
+        $this->printChatJson($senderToken, $receiverToken, $pid);
+    }
+
     public function printChatJson($senderToken, $receiverToken, $pid) {
         $this->view->printRawJson($this->model->fetchChat($senderToken, $receiverToken, $pid));
     }
