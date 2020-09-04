@@ -1,7 +1,7 @@
 <?php
 
 class DbEcommerceConn {
-    protected function connection() : PDO {
+    public function connection() : PDO {
         $host = "localhost";
         $dbname = "ecommerce";
         $username = "root";
