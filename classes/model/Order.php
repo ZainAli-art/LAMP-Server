@@ -7,6 +7,12 @@ class Order extends DbEcommerceConn {
         $this->connection()->query($sql);
     }
 
+    public function fetchOrdersByUid($uid) : array {
+        $sql = "SELECT * FROM orders WHERE uid = '$uid'";
+        $result = $this->connection()->query($sql);
+        return $result->fetchAll();
+    }
+
     public function fetchOrderedProductsByUid($uid) : array {
         $sql = "SELECT oid, pname AS product, img_dir
                 FROM orders o JOIN products p ON o.pid = p.pid

@@ -14,6 +14,10 @@ class OrderController {
         $this->model->add($uid, $pid);
     }
 
+    public function printOrdersByUidJson($uid) {
+        $this->view->printRawJson($this->model->fetchOrdersByUid($uid));
+    }
+
     public function printOrderedProductsByUidJson($uid) {
         $this->view->printRawJson($this->model->fetchOrderedProductsByUid($uid));
     }
